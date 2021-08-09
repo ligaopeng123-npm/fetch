@@ -13,6 +13,7 @@ import fetchIntercept from "fetch-intercept";
 import {Intercept, Unregister} from "./typing";
 
 const register = (intercept: Intercept): Unregister => {
+	// @ts-ignore
 	return fetchIntercept.register(intercept);
 };
 

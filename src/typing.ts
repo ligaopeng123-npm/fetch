@@ -9,7 +9,7 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {FetchInterceptor} from "fetch-intercept";
+import {FetchInterceptorResponse} from "fetch-intercept";
 
 export type ResponseType = 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
 
@@ -37,7 +37,14 @@ export type Fetch = (url: string, option?: Option) => Promise<any>;
 
 export type CreateFetch = (url: string, option: OptionBase) => Promise<any>;
 
-export interface Intercept extends FetchInterceptor {
+export interface Intercept {
+	request?(url: string, config: any): Promise<any[]> | any[];
+	
+	requestError?(error: any): Promise<any>;
+	
+	response?(response: FetchInterceptorResponse): Promise<any> | FetchInterceptorResponse;
+	
+	responseError?(error: any): Promise<any>;
 }
 
 export type Unregister = () => void;

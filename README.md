@@ -36,7 +36,7 @@ const intercept: Intercept = {
 		return Promise.reject(error);
 	}
 };
-// unregisterFetch 卸载拦截器 在app卸载时卸载掉
+// unregisterFetch 卸载拦截器 在app卸载时调用下 卸载掉
 export const unregisterFetch = register(Intercept);
 ```
 
