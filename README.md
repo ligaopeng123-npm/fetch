@@ -46,6 +46,10 @@ export const unregisterFetch = register(Intercept);
 body?: any; // post请求 参数放在body上
 params?: any; // get请求 参数拼接在url上
 responseType?: 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
+headers?: {
+    token?: string;
+    [propName: string]: any;
+};
 ```
 
 ### function
@@ -72,6 +76,13 @@ put(url:string, option: Option):Promise<any>;
 
 ```typescript
 del(url:string, option: Option):Promise<any>;
+```
+
+#### errorCode
+
+```typescript
+// 根据错误状态吗 返回错误信息
+errorCode(code:number):string;
 ```
 
 #### register

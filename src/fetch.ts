@@ -11,7 +11,7 @@
  **********************************************************************/
 import {CreateFetch, Fetch, MethodEnum, ResponseType} from "./typing";
 import {isArray, isObject, urlJoinParmas} from "@gaopeng123/utils";
-import ErrorCode from "./ErrorCode";
+import errorCode from "./errorCode";
 
 const cetateFetch: CreateFetch = (url, option) => {
 	const opt = Object.assign({}, option);
@@ -41,7 +41,7 @@ const cetateFetch: CreateFetch = (url, option) => {
 						// @ts-nocheck 动态检测responseType类型
 						resolve(data[responseType] ? data[responseType]() : res);
 					}
-					reject(ErrorCode(data.status));
+					reject(errorCode(data.status));
 				} else {
 					resolve(res);
 				}

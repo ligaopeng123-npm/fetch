@@ -9,7 +9,7 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-const ErrorCode = (code: number): string => {
+const errorCode = (code: number): string => {
 	let message = ``;
 	switch (code) {
 		case 400:
@@ -50,4 +50,4 @@ const ErrorCode = (code: number): string => {
 	}
 	return message;
 };
-export default ErrorCode
+export default errorCode

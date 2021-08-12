@@ -17,6 +17,10 @@ export type Option = {
 	body?: any; // post请求 参数放在body上
 	params?: any; // get请求 参数拼接在url上
 	responseType?: 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
+	headers?: {
+		token?: string;
+		[propName: string]: any;
+	};
 }
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
