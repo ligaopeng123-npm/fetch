@@ -27,13 +27,17 @@ const cetateFetch: CreateFetch = (url, option) => {
 	else if (option?.params && (isObject(option.params) || isArray(option.params))) {
 		url += urlJoinParmas(option?.params);
 	}
+	
+	/**
+	 * 覆盖headers 设置默认值
+	 */
+	const headers = Object.assign({
+		'Content-Type': 'application/json',
+	}, opt.headers);
+	
 	return new Promise((resolve, reject) => {
 			// "Content-Type", "text/plain"
-			fetch(url, Object.assign({
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}, opt)).then((res: Response) => {
+			fetch(url, Object.assign({}, opt, {headers})).then((res: Response) => {
 				if (res?.clone) {
 					const data: any = res.clone();
 					if (data.status >= 200 && data.status < 300) {
