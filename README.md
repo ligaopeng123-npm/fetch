@@ -82,7 +82,7 @@ del(url:string, option: Option):Promise<any>;
 
 ```typescript
 // 根据错误状态吗 返回错误信息
-errorCode(code:number):string;
+errorCode(code:number):string; 
 ```
 
 #### register
