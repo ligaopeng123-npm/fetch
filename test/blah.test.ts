@@ -1,10 +1,28 @@
-import {get} from '../src';
+import {post, register} from '../src';
+
+const Intercept: any = {
+	request(url: string, config: any) {
+		console.log(url, config)
+	},
+	
+	requestError(error: any) {
+		console.log(error)
+	},
+	
+	response(response: any) {
+		console.log(response)
+	},
+	
+	responseError(error: any) {
+		console.log(error)
+	},
+}
 
 describe('blah', () => {
 	it('works', () => {
-		get('https://baidu.com', {body: {name: 1}}).then((res: any)=> {
+		register(Intercept);
+		return post('http://data.cma.cn/kbweb/home/live').then((res: any) => {
 			console.log(res)
 		});
-		expect(get('https://baidu.com', {body: {name: 1}})).toEqual(2);
 	});
 });

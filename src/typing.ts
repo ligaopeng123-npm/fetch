@@ -9,7 +9,10 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {FetchInterceptorResponse} from "fetch-intercept";
+
+export interface FetchInterceptorResponse extends Response {
+	request: Request;
+}
 
 export type ResponseType = 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
 
