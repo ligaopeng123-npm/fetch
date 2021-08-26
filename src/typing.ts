@@ -12,15 +12,6 @@
 
 export type ResponseType = 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
 
-export type ResponseOptions = {
-	options: ResponseType
-}
-
-export interface FetchInterceptorResponse extends Response {
-	request: Request & ResponseOptions;
-}
-
-
 export type Options = {
 	body?: any; // post请求 参数放在body上
 	params?: any; // get请求 参数拼接在url上
@@ -29,6 +20,14 @@ export type Options = {
 		token?: string;
 		[propName: string]: any;
 	};
+}
+
+export type ResponseOptions = {
+	options: Options
+}
+
+export interface FetchInterceptorResponse extends Response {
+	request: Request & ResponseOptions;
 }
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
