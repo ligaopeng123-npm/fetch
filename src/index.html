@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="module">
+	import {get, register} from './index.js';
+
+	const Intercept = {
+		request(url, config) {
+			return [url, config]
+		},
+
+		requestError(error) {
+			console.log(error)
+		},
+
+		response(response) {
+			console.log(response)
+			return response;
+		},
+
+		responseError(error) {
+			console.log(error)
+		},
+	};
+	register(Intercept);
+	window.onload = function () {
+		const bth = document.getElementById('bth');
+		bth.addEventListener('click', () => {
+			get('/common/postcode/getPostCodeByAddr', {responseType: 'text'}).then((res) => {
+				console.log(res);
+			});
+		})
+	}
+</script>
+<button id="bth">点我</button>
+<p>显示区域</p>
+</body>
+</html>

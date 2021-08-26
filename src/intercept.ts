@@ -28,15 +28,21 @@ function interceptor(fetch: any, ...args: any[]) {
 	
 	// Register fetch call
 	promise = promise.then((args: any[]) => {
-		// @ts-ignore
-		const request = new Request(...args);
-		return fetch(request).then((response: any) => {
-			response.request = request;
-			return response;
-		}).catch((error: any) => {
-			error.request = request;
-			return Promise.reject(error);
-		});
+		if (args) {
+			// @ts-ignore
+			const request = new Request(...args);
+			return fetch(request).then((response: any) => {
+				response.request = request;
+				// 绑定options参数
+				response.request.options = args[1];
+				return response;
+			}).catch((error: any) => {
+				error.request = request;
+				return Promise.reject(error);
+			});
+		} else {
+			console.error('The response function requires a return value')
+		}
 	});
 	
 	// Register response interceptors

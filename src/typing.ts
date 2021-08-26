@@ -10,13 +10,18 @@
  *
  **********************************************************************/
 
-export interface FetchInterceptorResponse extends Response {
-	request: Request;
-}
-
 export type ResponseType = 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
 
-export type Option = {
+export type ResponseOptions = {
+	options: ResponseType
+}
+
+export interface FetchInterceptorResponse extends Response {
+	request: Request & ResponseOptions;
+}
+
+
+export type Options = {
 	body?: any; // post请求 参数放在body上
 	params?: any; // get请求 参数拼接在url上
 	responseType?: 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
@@ -38,11 +43,11 @@ export enum MethodEnum {
 export type OptionBase = {
 	method: Method,
 	[propName: string]: any;
-} & Option;
+} & Options;
 
-export type Fetch = (url: string, option?: Option) => Promise<any>;
+export type Fetch = (url: string, options?: Options) => Promise<any>;
 
-export type CreateFetch = (url: string, option: OptionBase) => Promise<any>;
+export type CreateFetch = (url: string, options: OptionBase) => Promise<any>;
 
 export interface Intercept {
 	request?(url: string, config: any): Promise<any[]> | any[];

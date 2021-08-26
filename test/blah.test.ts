@@ -1,4 +1,4 @@
-import {post, register} from '../src';
+import {get, register} from '../src';
 
 const Intercept: any = {
 	request(url: string, config: any) {
@@ -21,7 +21,7 @@ const Intercept: any = {
 describe('blah', () => {
 	it('works', () => {
 		register(Intercept);
-		return post('http://data.cma.cn/kbweb/home/live').then((res: any) => {
+		return get('https://api.apishop.net/common/postcode/getPostCodeByAddr', {responseType: 'text'}).then((res: any) => {
 			console.log(res)
 		});
 	});

@@ -13,19 +13,19 @@ import {CreateFetch, Fetch, MethodEnum, ResponseType} from "./typing";
 import {isArray, isObject, urlJoinParmas} from "@gaopeng123/utils";
 import errorCode from "./errorCode";
 
-const cetateFetch: CreateFetch = (url, option) => {
-	const opt = Object.assign({}, option);
+const cetateFetch: CreateFetch = (url, options) => {
+	const opt = Object.assign({responseType: 'json'}, options);
 	/**
 	 * 处理post请求
 	 */
-	if (option?.body && (isObject(option.body) || isArray(option.body))) {
-		opt.body = JSON.stringify(option.body);
+	if (options?.body && (isObject(options.body) || isArray(options.body))) {
+		opt.body = JSON.stringify(options.body);
 	}
 	/**
 	 * 处理get请求
 	 */
-	else if (option?.params && (isObject(option.params) || isArray(option.params))) {
-		url += urlJoinParmas(option?.params);
+	else if (options?.params && (isObject(options.params) || isArray(options.params))) {
+		url += urlJoinParmas(options?.params);
 	}
 	
 	/**
@@ -56,20 +56,20 @@ const cetateFetch: CreateFetch = (url, option) => {
 	)
 };
 
-export const get: Fetch = (url, option) => {
-	return cetateFetch(url, Object.assign({method: MethodEnum.get}, option));
+export const get: Fetch = (url, options) => {
+	return cetateFetch(url, Object.assign({method: MethodEnum.get}, options));
 };
 
-export const post: Fetch = (url, option) => {
-	return cetateFetch(url, Object.assign({method: MethodEnum.post}, option));
+export const post: Fetch = (url, options) => {
+	return cetateFetch(url, Object.assign({method: MethodEnum.post}, options));
 };
 
-export const put: Fetch = (url, option) => {
-	return cetateFetch(url, Object.assign({method: MethodEnum.put}, option));
+export const put: Fetch = (url, options) => {
+	return cetateFetch(url, Object.assign({method: MethodEnum.put}, options));
 };
 
-export const del: Fetch = (url, option) => {
-	return cetateFetch(url, Object.assign({method: MethodEnum.del}, option));
+export const del: Fetch = (url, options) => {
+	return cetateFetch(url, Object.assign({method: MethodEnum.del}, options));
 };
 
 export default {
