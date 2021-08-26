@@ -6,7 +6,7 @@
 </head>
 <body>
 <script type="module">
-	import {get, register} from './index.js';
+	import {get, register, post} from './index.js';
 
 	const Intercept = {
 		request(url, config) {
@@ -31,6 +31,9 @@
 		const bth = document.getElementById('bth');
 		bth.addEventListener('click', () => {
 			get('/common/postcode/getPostCodeByAddr', {responseType: 'text'}).then((res) => {
+				console.log(res);
+			});
+			post('http://baidu.com', {responseType: 'text'}).then((res) => {
 				console.log(res);
 			});
 		})

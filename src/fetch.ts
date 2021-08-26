@@ -50,7 +50,7 @@ const cetateFetch: CreateFetch = (url, options) => {
 					resolve(res);
 				}
 			}).catch((error: Error) => {
-				console.error(`${url}请求出错，`, error)
+				console.error(`${url}请求出错，`, error);
 			});
 		}
 	)
