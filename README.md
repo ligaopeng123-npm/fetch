@@ -46,6 +46,7 @@ export const unregisterFetch = register(Intercept);
 body?: any; // post请求 参数放在body上
 params?: any; // get请求 参数拼接在url上
 responseType?: 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
+noModification?: boolean, // 是否要根据responseType做数据获取
 headers?: {
     token?: string;
     [propName: string]: any;

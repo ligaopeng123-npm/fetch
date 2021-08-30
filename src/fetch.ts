@@ -41,9 +41,13 @@ const cetateFetch: CreateFetch = (url, options) => {
 				if (res?.clone) {
 					const data: any = res.clone();
 					if (data.status >= 200 && data.status < 300) {
-						const responseType: ResponseType = opt.responseType || 'json';
-						// @ts-nocheck 动态检测responseType类型
-						resolve(data[responseType] ? data[responseType]() : res);
+						if (opt.noModification) {
+							resolve(res);
+						} else {
+							const responseType: ResponseType = opt.responseType || 'json';
+							// @ts-nocheck 动态检测responseType类型
+							resolve(data[responseType] ? data[responseType]() : res);
+						}
 					}
 					reject(errorCode(data.status));
 				} else {
