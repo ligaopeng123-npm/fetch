@@ -10,10 +10,11 @@
  *
  **********************************************************************/
 import {CreateFetch, Fetch, MethodEnum, ResponseType} from "./typing";
-import {isArray, isObject, urlJoinParmas} from "@gaopeng123/utils";
+import {isArray, isEmptyObject, isObject, urlJoinParmas} from "@gaopeng123/utils";
 import errorCode from "./errorCode";
 
 const cetateFetch: CreateFetch = (url, options) => {
+	// 配置默认的responseType
 	const opt = Object.assign({responseType: 'json'}, options);
 	/**
 	 * 处理post请求
@@ -30,8 +31,10 @@ const cetateFetch: CreateFetch = (url, options) => {
 	
 	/**
 	 * 覆盖headers 设置默认值
+	 * 如果是直接覆盖操作 此处影响其他组件对headers的操作
+	 * 因此 此处如果header配置的是 {} 空对象 此处不做其他处理
 	 */
-	const headers = Object.assign({
+	const headers = isEmptyObject(opt.headers) ? opt.headers : Object.assign({
 		'Content-Type': 'application/json',
 	}, opt.headers);
 	
