@@ -93,7 +93,7 @@ const attach = (env: any) => {
 const ENVIRONMENT_IS_WORKER = typeof importScripts === 'function';
 
 const fetchIntercept = attach(ENVIRONMENT_IS_WORKER ? self : window);
-
+// 后续此处定义其他属性 例如可定义下发接口时长监听等
 const register = (intercept: Intercept): Unregister => {
 	// @ts-ignore
 	return fetchIntercept.register(intercept);
