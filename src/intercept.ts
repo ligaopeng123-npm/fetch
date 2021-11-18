@@ -61,6 +61,7 @@ const attach = (env: any) => {
 	// Make sure fetch is available in the given environment
 	if (!env.fetch) {
 		try {
+			// @ts-ignore
 			require('node-fetch');
 		} catch (err) {
 			throw Error('No fetch available. Unable to register fetch-intercept');
