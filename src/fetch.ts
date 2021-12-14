@@ -13,7 +13,7 @@ import {CreateFetch, Fetch, MethodEnum, ResponseType} from "./typing";
 import {isArray, isEmptyObject, isObject, urlJoinParmas} from "@gaopeng123/utils";
 import errorCode from "./errorCode";
 
-const cetateFetch: CreateFetch = (url, options) => {
+export const cetateFetch: CreateFetch = (url, options) => {
     // 配置默认的responseType
     const opt = Object.assign({responseType: 'json'}, options);
     /**
@@ -81,9 +81,14 @@ export const del: Fetch = (url, options) => {
     return cetateFetch(url, Object.assign({method: MethodEnum.del}, options));
 };
 
+export const patch: Fetch = (url, options) => {
+    return cetateFetch(url, Object.assign({method: MethodEnum.patch}, options));
+};
+
 export default {
     get,
     post,
     put,
     del,
+    patch,
 }
