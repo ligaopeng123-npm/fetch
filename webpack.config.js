@@ -35,7 +35,7 @@ module.exports = {
 							}]
 						],
 						plugins: [
-							
+
 							// [
 							//     '@babel/plugin-proposal-decorators',
 							//     {'legacy': true}
@@ -45,7 +45,7 @@ module.exports = {
 								{'loose': true} // 宽松模式
 							]
 							// '@babel/plugin-transform-runtime'，
-						
+
 						]
 					}
 				},
@@ -57,7 +57,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: '测试fetch',
-			template: './src/index.html'
+			template: './__test__/index.html'
 		}),
 	],
 	experiments: {

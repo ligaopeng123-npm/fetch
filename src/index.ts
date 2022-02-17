@@ -1,5 +1,5 @@
 // 增删改查
-export {cetateFetch as cetateFetch} from './fetch';
+export {createFetch as createFetch} from './fetch';
 export {get as get} from './fetch';
 export {post as post} from './fetch';
 export {put as put} from './fetch';

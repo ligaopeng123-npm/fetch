@@ -10,10 +10,11 @@
  *
  **********************************************************************/
 import {CreateFetch, Fetch, MethodEnum, ResponseType} from "./typing";
-import {isArray, isEmptyObject, isObject, urlJoinParmas} from "@gaopeng123/utils";
+import {isArray, isEmptyObject, isObject} from "@gaopeng123/utils.types";
+import {urlJoinParmas} from "@gaopeng123/utils.file";
 import errorCode from "./errorCode";
 
-export const cetateFetch: CreateFetch = (url, options) => {
+export const createFetch: CreateFetch = (url, options) => {
     // 配置默认的responseType
     const opt = Object.assign({responseType: 'json'}, options);
     /**
@@ -66,23 +67,23 @@ export const cetateFetch: CreateFetch = (url, options) => {
 };
 
 export const get: Fetch = (url, options) => {
-    return cetateFetch(url, Object.assign({method: MethodEnum.get}, options));
+    return createFetch(url, Object.assign({method: MethodEnum.get}, options));
 };
 
 export const post: Fetch = (url, options) => {
-    return cetateFetch(url, Object.assign({method: MethodEnum.post}, options));
+    return createFetch(url, Object.assign({method: MethodEnum.post}, options));
 };
 
 export const put: Fetch = (url, options) => {
-    return cetateFetch(url, Object.assign({method: MethodEnum.put}, options));
+    return createFetch(url, Object.assign({method: MethodEnum.put}, options));
 };
 
 export const del: Fetch = (url, options) => {
-    return cetateFetch(url, Object.assign({method: MethodEnum.del}, options));
+    return createFetch(url, Object.assign({method: MethodEnum.del}, options));
 };
 
 export const patch: Fetch = (url, options) => {
-    return cetateFetch(url, Object.assign({method: MethodEnum.patch}, options));
+    return createFetch(url, Object.assign({method: MethodEnum.patch}, options));
 };
 
 export default {

@@ -6,10 +6,11 @@
 </head>
 <body>
 <script type="module">
-	import {get, register, post} from './index.js';
+	import {get, register, post} from '../src';
 
 	const Intercept = {
 		request(url, config) {
+            console.log(url)
 			return [url, config]
 		},
 
@@ -30,12 +31,12 @@
 	window.onload = function () {
 		const bth = document.getElementById('bth');
 		bth.addEventListener('click', () => {
-			get('/common/postcode/getPostCodeByAddr', {responseType: 'text'}).then((res) => {
+			get('/test.json', {responseType: 'text'}).then((res) => {
 				console.log(res);
 			});
-			post('http://www.baidu.com', {responseType: 'text'}).then((res) => {
-				console.log(res);
-			});
+			// post('http://www.baidu.com', {responseType: 'text'}).then((res) => {
+			// 	console.log(res);
+			// });
 		})
 	}
 </script>

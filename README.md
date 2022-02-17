@@ -3,14 +3,12 @@
 ```typescript
 import {register} from '@gaopeng123/fetch';
 
-export {cetateFetch as cetateFetch} from "@gaopeng123/fetch";
+export {createFetch as createFetch} from "@gaopeng123/fetch";
 export {get as get} from "@gaopeng123/fetch";
 export {post as post} from "@gaopeng123/fetch";
 export {put as put} from "@gaopeng123/fetch";
 export {del as del} from "@gaopeng123/fetch";
 export {patch as patch} from "@gaopeng123/fetch";
-
-export {cetateFetch as cetateFetch} from "@gaopeng123/fetch";
 
 const intercept: Intercept = {
 	request: function (url: string, config: Option) {
