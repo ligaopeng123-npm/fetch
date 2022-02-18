@@ -6,41 +6,48 @@
 </head>
 <body>
 <script type="module">
-	import {get, register, post} from '../src';
+    import {get, register, post} from './index.js';
 
-	const Intercept = {
-		request(url, config) {
+    const Intercept = {
+        request(url, config) {
             console.log(url)
-			return [url, config]
-		},
+            return [url, config]
+        },
 
-		requestError(error) {
-			console.log(error)
-		},
+        requestError(error) {
+            console.log(error)
+        },
 
-		response(response) {
-			console.log(response)
-			return response;
-		},
+        response(response) {
+            console.log(response)
+            return response;
+        },
 
-		responseError(error) {
-			console.log(error)
-		},
-	};
-	register(Intercept);
-	window.onload = function () {
-		const bth = document.getElementById('bth');
-		bth.addEventListener('click', () => {
-			get('/test.json', {responseType: 'text'}).then((res) => {
-				console.log(res);
-			});
-			// post('http://www.baidu.com', {responseType: 'text'}).then((res) => {
-			// 	console.log(res);
-			// });
-		})
-	}
+        responseError(error) {
+            console.log(error)
+        },
+    };
+    register(Intercept);
+    window.onload = function () {
+        const abortController = new AbortController();
+        const bth = document.getElementById('bth');
+        bth.addEventListener('click', () => {
+            get('/test.json', {responseType: 'text', abortController: abortController}).then((res) => {
+                console.log(res);
+            });
+            // post('http://www.baidu.com', {responseType: 'text'}).then((res) => {
+            // 	console.log(res);
+            // });
+        });
+
+        const abort = document.getElementById('abort');
+        abort.addEventListener('click', () => {
+            abortController.abort();
+        });
+    }
 </script>
-<button id="bth">点我</button>
+<button id="bth">下发</button>
+<button id="abort">abort</button>
 <p>显示区域</p>
 </body>
 </html>

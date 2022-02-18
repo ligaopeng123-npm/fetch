@@ -17,6 +17,7 @@ export type Options = {
     params?: any; // get请求 参数拼接在url上
     responseType?: 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
     noModification?: boolean, // 是否要根据responseType做数据获取
+    abortController?: AbortController, // 控制fetch abort
     headers?: {
         token?: string;
         [propName: string]: any;
@@ -43,6 +44,7 @@ export enum MethodEnum {
 
 export type OptionBase = {
     method: Method,
+    abortController?: AbortController,
     [propName: string]: any;
 } & Options;
 

@@ -12,7 +12,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.tsx?$/,
+				test: /\.ts?$/,
 				use: 'ts-loader',
 				exclude: /node_modules/
 			},
@@ -49,7 +49,7 @@ module.exports = {
 						]
 					}
 				},
-				include: path.resolve(__dirname, 'src'),
+				include: [path.resolve(__dirname, '__tests__'), path.resolve(__dirname, 'src')],
 				exclude: /node_modules/
 			}
 		]
@@ -66,13 +66,13 @@ module.exports = {
 	output: {
 		filename: 'index.js',
 		libraryTarget: 'module', //module es6模式 umd模式
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, '__test__')
 		// clean: true, // 清理冗余文件
 	},
 	target: 'web',
 	devServer: {
 		static: {
-			directory: path.join(__dirname, 'dist'),
+			directory: path.join(__dirname, '__test__'),
 		},
 		// contentBase: path.resolve(__dirname, 'dist'),
 		// 压缩代码 先注释

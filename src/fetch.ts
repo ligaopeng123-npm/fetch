@@ -18,6 +18,13 @@ export const createFetch: CreateFetch = (url, options) => {
     // 配置默认的responseType
     const opt = Object.assign({responseType: 'json'}, options);
     /**
+     * 控制器
+     */
+    if (opt.abortController && opt.abortController.signal) {
+        opt.signal = opt.abortController.signal;
+        delete opt.abortController;
+    }
+    /**
      * 处理post请求
      */
     if (options?.body && (isObject(options.body) || isArray(options.body))) {
