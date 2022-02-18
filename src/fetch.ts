@@ -14,6 +14,11 @@ import {isArray, isEmptyObject, isObject} from "@gaopeng123/utils.types";
 import {urlJoinParmas} from "@gaopeng123/utils.file";
 import errorCode from "./errorCode";
 
+/**
+ * 创建fetch函数
+ * @param url
+ * @param options
+ */
 export const createFetch: CreateFetch = (url, options) => {
     // 配置默认的responseType
     const opt = Object.assign({responseType: 'json'}, options);
