@@ -33,7 +33,7 @@ export interface FetchInterceptorResponse extends Response {
 }
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-
+// 请求类型映射
 export enum MethodEnum {
     get = 'GET',
     post = 'POST',
