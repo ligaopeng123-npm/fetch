@@ -13,6 +13,7 @@ import {CreateFetch, Fetch, MethodEnum, ResponseType} from "./typing";
 import {isArray, isEmptyObject, isObject} from "@gaopeng123/utils.types";
 import {urlJoinParmas} from "@gaopeng123/utils.file";
 import errorCode from "./errorCode";
+import {__fetch__} from "./intercept";
 
 /**
  * 创建fetch函数
@@ -53,7 +54,7 @@ export const createFetch: CreateFetch = (url, options) => {
 
     return new Promise((resolve, reject) => {
             // "Content-Type", "text/plain"
-            fetch(url, Object.assign({}, opt, {headers})).then((res: Response) => {
+            __fetch__(url, Object.assign({}, opt, {headers})).then((res: Response) => {
                 if (res?.clone) {
                     const data: any = res.clone();
                     if (data.status >= 200 && data.status < 300) {

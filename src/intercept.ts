@@ -12,8 +12,12 @@
 import {Intercept, Unregister} from "./typing";
 
 let interceptors: Array<Intercept> = [];
+/**
+ * 重新覆盖fetch 防止影响其他使用fetch的模块 特别是webpack5的热更新
+ */
+export let __fetch__: any = null;
 
-function interceptor(fetch: any, ...args: any[]) {
+function interceptor(_fetch_: any, ...args: any[]) {
     // @ts-ignore
     const reversedInterceptors: Array<Intercept> = interceptors.reduce((array, interceptor) => [interceptor].concat(array), []);
     let promise = Promise.resolve(args);
@@ -31,7 +35,7 @@ function interceptor(fetch: any, ...args: any[]) {
         if (args) {
             // @ts-ignore
             const request = new Request(...args);
-            return fetch(request).then((response: any) => {
+            return _fetch_(request).then((response: any) => {
                 response.request = request;
                 // 绑定options参数
                 response.request.options = args[1];
@@ -57,9 +61,9 @@ function interceptor(fetch: any, ...args: any[]) {
 }
 
 
-const attach = (env: any) => {
+const attach = (_fetch: any) => {
     // Make sure fetch is available in the given environment
-    if (!env.fetch) {
+    if (!_fetch) {
         try {
             // @ts-ignore
             require('node-fetch');
@@ -67,11 +71,11 @@ const attach = (env: any) => {
             throw Error('No fetch available. Unable to register fetch-intercept');
         }
     }
-    env.fetch = (function (fetch) {
+    __fetch__ = (function (__fetch) {
         return function (...args: any[]) {
-            return interceptor(fetch, ...args);
+            return interceptor(__fetch, ...args);
         };
-    })(env.fetch);
+    })(_fetch);
 
     return {
         register: function (interceptor: Intercept) {
@@ -94,7 +98,12 @@ const ENVIRONMENT_IS_WORKER = typeof importScripts === 'function';
 
 // 兼容node环境
 const getAttachProps = () => {
-    return ENVIRONMENT_IS_WORKER ? self : window;
+    if (ENVIRONMENT_IS_WORKER) {
+        __fetch__ = self.fetch;
+    } else {
+        __fetch__ = window.fetch;
+    }
+    return __fetch__;
 }
 
 const fetchIntercept = attach(getAttachProps());
