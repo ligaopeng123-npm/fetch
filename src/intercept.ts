@@ -10,6 +10,7 @@
  *
  **********************************************************************/
 import {Intercept, Unregister} from "./typing";
+import {isAbortError} from "./errorCode";
 
 let interceptors: Array<Intercept> = [];
 /**
@@ -35,11 +36,13 @@ function interceptor(_fetch_: any, ...args: any[]) {
         if (args) {
             // @ts-ignore
             const request = new Request(...args);
+
             return _fetch_(request).then((response: any) => {
                 response.request = request;
                 // 绑定options参数
                 response.request.options = args[1];
                 return response;
+                // @ts-ignore
             }).catch((error: any) => {
                 error.request = request;
                 return Promise.reject(error);
@@ -53,7 +56,11 @@ function interceptor(_fetch_: any, ...args: any[]) {
     reversedInterceptors.forEach(({response, responseError}) => {
         if (response || responseError) {
             // @ts-ignore
-            promise = promise.then(response, responseError);
+            promise = promise.then(response, (error)=> {
+                if (!isAbortError(error)) {
+                    responseError && responseError(error);
+                }
+            });
         }
     });
 

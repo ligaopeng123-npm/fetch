@@ -12,7 +12,7 @@
 import {CreateFetch, Fetch, MethodEnum, ResponseType} from "./typing";
 import {isArray, isEmptyObject, isObject} from "@gaopeng123/utils.types";
 import {urlJoinParmas} from "@gaopeng123/utils.file";
-import errorCode from "./errorCode";
+import errorCode, {isAbortError} from "./errorCode";
 import {__fetch__} from "./intercept";
 
 /**
@@ -68,12 +68,19 @@ export const createFetch: CreateFetch = (url, options) => {
                     }
                     reject(errorCode(data.status));
                 } else {
-                    resolve(res);
+                    if (res !== undefined) {
+                        resolve(res);
+                    }
                 }
             }).catch((error: Error) => {
-                console.error(`${url}请求出错，`, error);
-                // 抛出报错信息 让模块接收到响应
-                reject(`${url}请求出错，${error}`);
+                // 如果是AbortError 则不再抛出
+                if (isAbortError(error)) {
+                    console.error(error);
+                } else {
+                    console.error(`${url}请求出错，`, error);
+                    // 抛出报错信息 让模块接收到响应
+                    reject(`${url}请求出错，${error}`);
+                }
             });
         }
     )

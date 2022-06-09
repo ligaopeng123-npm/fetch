@@ -50,4 +50,11 @@ const errorCode = (code: number): string => {
 	}
 	return message;
 };
+/**
+ * 判断是否是isAbortError
+ * @param error
+ */
+export const isAbortError = (error: Error)=> {
+	return `${error}`?.includes('The user aborted a request.');
+}
 export default errorCode

@@ -29,15 +29,16 @@
     };
     register(Intercept);
     window.onload = function () {
-        const abortController = new AbortController();
+        let abortController;
         const bth = document.getElementById('bth');
-        bth.addEventListener('click', () => {
+        const getData = () => {
+            abortController = new AbortController();
             get('/test.json', {responseType: 'text', abortController: abortController}).then((res) => {
                 console.log(res);
             });
-            // post('http://www.baidu.com', {responseType: 'text'}).then((res) => {
-            // 	console.log(res);
-            // });
+        }
+        bth.addEventListener('click', () => {
+            getData();
         });
         /**
          * 测试是否可取消下发
@@ -45,7 +46,10 @@
          */
         const abort = document.getElementById('abort');
         abort.addEventListener('click', () => {
-            abortController.abort();
+            getData();
+            setTimeout(() => {
+                abortController.abort();
+            }, 100);
         });
     }
 </script>
