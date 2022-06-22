@@ -63,6 +63,14 @@ headers?: {
 
 ## function
 
+### createFetch
+
+`创建带有拦截器及响应数据处理的fetch函数`
+
+```typescript
+createFetch(url:string, option: Option):Promise<any>;
+```
+
 ### get
 
 ```typescript

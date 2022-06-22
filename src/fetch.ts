@@ -141,13 +141,3 @@ export const downLoadFile: DownloadFile = (url, options) => {
 export const uploadFormData: Fetch = (url, options) => {
     return createFetch(url, Object.assign({method: MethodEnum.post, headers: {}}, options));
 }
-
-export default {
-    get,
-    post,
-    put,
-    del,
-    patch,
-    downLoadFile,
-    uploadFormData
-}
