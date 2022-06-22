@@ -9,9 +9,9 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {CreateFetch, Fetch, MethodEnum, ResponseType} from "./typing";
+import {CreateFetch, DownloadFile, Fetch, MethodEnum, ResponseType} from "./typing";
 import {isArray, isEmptyObject, isObject} from "@gaopeng123/utils.types";
-import {urlJoinParmas} from "@gaopeng123/utils.file";
+import {download, urlJoinParmas} from "@gaopeng123/utils.file";
 import errorCode, {isAbortError} from "./errorCode";
 import {__fetch__} from "./intercept";
 
@@ -65,8 +65,9 @@ export const createFetch: CreateFetch = (url, options) => {
                             // @ts-nocheck 动态检测responseType类型
                             resolve(data[responseType] ? data[responseType]() : res);
                         }
+                    } else {
+                        reject(errorCode(data.status));
                     }
-                    reject(errorCode(data.status));
                 } else {
                     if (res !== undefined) {
                         resolve(res);
@@ -105,6 +106,41 @@ export const del: Fetch = (url, options) => {
 export const patch: Fetch = (url, options) => {
     return createFetch(url, Object.assign({method: MethodEnum.patch}, options));
 };
+/**
+ * 文件下载
+ * @param url
+ * @param options
+ */
+export const downLoadFile: DownloadFile = (url, options) => {
+    return new Promise((resolve, reject) => {
+        createFetch(url, Object.assign({method: MethodEnum.post, noModification: true}, options))
+            .then((res) => {
+                if (res.headers.get('content-type') === 'application/json') {
+                    res.clone().json().then((data: any) => {
+                        resolve(data);
+                    });
+                } else {
+                    res.clone().blob().then((blob: Blob) => {
+                        download({blob: blob, fileName: options.fileName});
+                        resolve({
+                            progress: 'start download'
+                        });
+                    });
+                }
+            }).catch((err) => {
+            reject(err)
+        });
+    })
+};
+
+/**
+ * 表单上传
+ * @param url
+ * @param options
+ */
+export const uploadFormData: Fetch = (url, options) => {
+    return createFetch(url, Object.assign({method: MethodEnum.post, headers: {}}, options));
+}
 
 export default {
     get,
@@ -112,4 +148,6 @@ export default {
     put,
     del,
     patch,
+    downLoadFile,
+    uploadFormData
 }

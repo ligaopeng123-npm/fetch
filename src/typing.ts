@@ -33,6 +33,7 @@ export interface FetchInterceptorResponse extends Response {
 }
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+
 // 请求类型映射
 export enum MethodEnum {
     get = 'GET',
@@ -51,6 +52,8 @@ export type OptionBase = {
 export type Fetch = (url: string, options?: Options) => Promise<any>;
 
 export type CreateFetch = (url: string, options: OptionBase) => Promise<any>;
+
+export type DownloadFile = (url: string, options: OptionBase & { fileName?: string }) => Promise<{ progress: string }> | any;
 
 export interface Intercept {
     request?(url: string, config: any): Promise<any[]> | any[];

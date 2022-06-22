@@ -1,6 +1,8 @@
+## 介绍
+
+`fetch函数封装，提供更便捷的使用方式`
+
 ## Usage
-
-
 
 ```typescript
 import {register} from '@gaopeng123/fetch';
@@ -61,38 +63,74 @@ headers?: {
 
 ## function
 
-#### get
+### get
 
 ```typescript
 get(url:string, option: Option):Promise<any>;
 ```
 
-#### post
+### post
 
 ```typescript
 post(url:string, option: Option):Promise<any>;
 ```
 
-#### put
+### put
 
 ```typescript
 put(url:string, option: Option):Promise<any>;
 ```
 
-#### del
+### del
 
 ```typescript
 del(url:string, option: Option):Promise<any>;
 ```
 
-#### errorCode
+### patch
+
+```typescript
+patch(url:string, option: Option):Promise<any>;
+```
+
+### downLoadFile
+
+`文件流下载`
+
+```typescript
+downLoadFile(url:string, option: Option):Promise<{ progress: string }> | any;
+// 1 跟服务端有参数下发
+downLoadFile("/api", {body: {}}).then((res)=>{
+    if(res.progress){
+       // 开始下载
+    }
+});
+// 2 根据服务端数据类型来判断是否有文件可以下载
+downLoadFile("/api", {body: {}}).then((res)=>{
+    if(!res.progress){
+       // 服务端响应内容
+    }
+});
+```
+
+### uploadFormData
+
+`表单上传`
+
+```typescript
+uploadFormData('api', {body: formData}).then(()=> {
+    
+})
+```
+
+### errorCode
 
 ```typescript
 // 根据错误状态吗 返回错误信息
 errorCode(code:number):string; 
 ```
 
-#### register
+### register
 
 `注入拦截器`
 
@@ -100,7 +138,7 @@ errorCode(code:number):string;
 (intercept: Intercept): Unregister;
 ```
 
-#### Intercept 
+### Intercept 
 
 `拦截器属性`
 
