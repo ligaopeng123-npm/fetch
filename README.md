@@ -110,13 +110,13 @@ downLoadFile(url:string, option: Option):Promise<{ progress: string }> | any;
 // 1 跟服务端有参数下发
 downLoadFile("/api", {body: {}}).then((res)=>{
     if(res.progress){
-       // 开始下载
+       // 开始下载 如果有状态 此处可以清除状态
     }
 });
 // 2 根据服务端数据类型来判断是否有文件可以下载
 downLoadFile("/api", {body: {}}).then((res)=>{
     if(!res.progress){
-       // 服务端响应内容
+       // 服务端响应内容 下载内容失败 此处可处理一些逻辑
     }
 });
 ```
