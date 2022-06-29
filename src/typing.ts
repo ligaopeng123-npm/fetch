@@ -53,7 +53,7 @@ export type Fetch = (url: string, options?: Options) => Promise<any>;
 
 export type CreateFetch = (url: string, options: OptionBase) => Promise<any>;
 
-export type DownloadFile = (url: string, options: OptionBase & { fileName?: string }) => Promise<{ progress: string }> | any;
+export type DownloadFile = (url: string, options: OptionBase & { fileName?: string, method?: Method }) => Promise<{ progress: string }> | any;
 
 export interface Intercept {
     request?(url: string, config: any): Promise<any[]> | any[];

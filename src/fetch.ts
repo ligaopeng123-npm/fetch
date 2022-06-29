@@ -113,7 +113,7 @@ export const patch: Fetch = (url, options) => {
  */
 export const downLoadFile: DownloadFile = (url, options) => {
     return new Promise((resolve, reject) => {
-        createFetch(url, Object.assign({method: MethodEnum.post, noModification: true}, options))
+        createFetch(url, Object.assign({method: MethodEnum.post, noModification: true, responseType: 'blob'}, options))
             .then((res) => {
                 if (res.headers.get('content-type') === 'application/json') {
                     res.clone().json().then((data: any) => {
@@ -127,9 +127,10 @@ export const downLoadFile: DownloadFile = (url, options) => {
                         });
                     });
                 }
-            }).catch((err) => {
-            reject(err)
-        });
+            })
+            .catch((err) => {
+                reject(err)
+            });
     })
 };
 
