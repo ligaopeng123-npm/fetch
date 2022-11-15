@@ -126,7 +126,7 @@ export const downLoadFile: DownloadFile = (url, options) => {
                 } else {
                     res.clone().blob().then((blob: Blob) => {
                         const fileName = res?.headers?.get('content-disposition')?.replace('attachment;filename=', '');
-                        download({ blob: blob, fileName: options.fileName || fileName });
+                        download({ blob: blob, fileName: options.fileName || (fileName ? decodeURI(fileName) : '') });
                         resolve({
                             progress: 'start download'
                         });
