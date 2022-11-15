@@ -9,11 +9,11 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {CreateFetch, DownloadFile, Fetch, MethodEnum, ResponseType} from "./typing";
-import {isArray, isEmptyObject, isObject} from "@gaopeng123/utils.types";
-import {download, urlJoinParmas} from "@gaopeng123/utils.file";
-import errorCode, {isAbortError} from "./errorCode";
-import {__fetch__} from "./intercept";
+import { CreateFetch, DownloadFile, Fetch, MethodEnum, ResponseType } from "./typing";
+import { isArray, isEmptyObject, isObject } from "@gaopeng123/utils.types";
+import { download, urlJoinParmas } from "@gaopeng123/utils.file";
+import errorCode, { isAbortError } from "./errorCode";
+import { __fetch__ } from "./intercept";
 
 /**
  * 创建fetch函数
@@ -22,7 +22,7 @@ import {__fetch__} from "./intercept";
  */
 export const createFetch: CreateFetch = (url, options) => {
     // 配置默认的responseType
-    const opt = Object.assign({responseType: 'json'}, options);
+    const opt = Object.assign({ responseType: 'json' }, options);
     /**
      * 控制器
      */
@@ -54,7 +54,7 @@ export const createFetch: CreateFetch = (url, options) => {
 
     return new Promise((resolve, reject) => {
             // "Content-Type", "text/plain"
-            __fetch__(url, Object.assign({}, opt, {headers})).then((res: Response) => {
+            __fetch__(url, Object.assign({}, opt, { headers })).then((res: Response) => {
                 if (res?.clone) {
                     const data: any = res.clone();
                     if (data.status >= 200 && data.status < 300) {
@@ -88,23 +88,23 @@ export const createFetch: CreateFetch = (url, options) => {
 };
 
 export const get: Fetch = (url, options) => {
-    return createFetch(url, Object.assign({method: MethodEnum.get}, options));
+    return createFetch(url, Object.assign({ method: MethodEnum.get }, options));
 };
 
 export const post: Fetch = (url, options) => {
-    return createFetch(url, Object.assign({method: MethodEnum.post}, options));
+    return createFetch(url, Object.assign({ method: MethodEnum.post }, options));
 };
 
 export const put: Fetch = (url, options) => {
-    return createFetch(url, Object.assign({method: MethodEnum.put}, options));
+    return createFetch(url, Object.assign({ method: MethodEnum.put }, options));
 };
 
 export const del: Fetch = (url, options) => {
-    return createFetch(url, Object.assign({method: MethodEnum.del}, options));
+    return createFetch(url, Object.assign({ method: MethodEnum.del }, options));
 };
 
 export const patch: Fetch = (url, options) => {
-    return createFetch(url, Object.assign({method: MethodEnum.patch}, options));
+    return createFetch(url, Object.assign({ method: MethodEnum.patch }, options));
 };
 /**
  * 文件下载
@@ -113,7 +113,11 @@ export const patch: Fetch = (url, options) => {
  */
 export const downLoadFile: DownloadFile = (url, options) => {
     return new Promise((resolve, reject) => {
-        createFetch(url, Object.assign({method: MethodEnum.post, noModification: true, responseType: 'blob'}, options))
+        createFetch(url, Object.assign({
+            method: MethodEnum.post,
+            noModification: true,
+            responseType: 'blob'
+        }, options))
             .then((res) => {
                 if (res.headers.get('content-type') === 'application/json') {
                     res.clone().json().then((data: any) => {
@@ -121,7 +125,8 @@ export const downLoadFile: DownloadFile = (url, options) => {
                     });
                 } else {
                     res.clone().blob().then((blob: Blob) => {
-                        download({blob: blob, fileName: options.fileName});
+                        const fileName = res?.headers?.get('content-disposition')?.replace('attachment;filename=', '');
+                        download({ blob: blob, fileName: options.fileName || fileName });
                         resolve({
                             progress: 'start download'
                         });
@@ -140,5 +145,5 @@ export const downLoadFile: DownloadFile = (url, options) => {
  * @param options
  */
 export const uploadFormData: Fetch = (url, options) => {
-    return createFetch(url, Object.assign({method: MethodEnum.post, headers: {}}, options));
+    return createFetch(url, Object.assign({ method: MethodEnum.post, headers: {} }, options));
 }
