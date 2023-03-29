@@ -43,17 +43,21 @@ export enum MethodEnum {
     patch = 'PATCH',
 }
 
+
+export type OptionAbort = {
+    abortController?: AbortController;
+    signal?: AbortSignal;
+}
+
 export type OptionBase = {
-    method: Method,
-    abortController?: AbortController,
-    [propName: string]: any;
-} & Options;
+    method: Method;
+} & Options & OptionAbort;
 
 export type Fetch = (url: string, options?: Options) => Promise<any>;
 
 export type CreateFetch = (url: string, options: OptionBase) => Promise<any>;
 
-export type DownloadFile = (url: string, options: OptionBase & { fileName?: string, method?: Method }) => Promise<{ progress: string }> | any;
+export type DownloadFile = (url: string, options: { fileName?: string, method?: Method } & Options & OptionAbort) => Promise<{ progress: string }> | any;
 
 export interface Intercept {
     request?(url: string, config: any): Promise<any[]> | any[];
