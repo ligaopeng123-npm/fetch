@@ -20,10 +20,10 @@
         "size": "size-limit",
         "analyze": "size-limit --why"
     },
-    "peerDependencies": {},
     "husky": {
         "hooks": {
-            "pre-commit": "tsdx lint"
+            "pre-commit": "tsdx lint",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },
     "prettier": {
@@ -51,6 +51,9 @@
     ],
     "devDependencies": {
         "@size-limit/preset-small-lib": "^5.0.2",
+        "commitizen": "^4.3.0",
+        "conventional-changelog-cli": "^2.2.2",
+        "cz-conventional-changelog": "^3.3.0",
         "html-webpack-plugin": "^5.3.2",
         "husky": "^7.0.1",
         "size-limit": "^5.0.2",
@@ -66,5 +69,10 @@
         "@gaopeng123/utils.file": "^0.4.0",
         "@gaopeng123/utils.types": "^0.4.0",
         "node-fetch": "^2.6.1"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }
