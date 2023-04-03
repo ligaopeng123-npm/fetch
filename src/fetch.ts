@@ -10,7 +10,7 @@
  *
  **********************************************************************/
 import { CreateFetch, DownloadFile, Fetch, MethodEnum, ResponseType } from "./typing";
-import { isArray, isEmptyObject, isObject } from "@gaopeng123/utils.types";
+import { isArray, isEmptyObject, isObject, isFormData, isEmpty } from "@gaopeng123/utils.types";
 import { download, urlJoinParmas } from "@gaopeng123/utils.file";
 import errorCode, { isAbortError } from "./errorCode";
 import { __fetch__ } from "./intercept";
@@ -140,10 +140,31 @@ export const downLoadFile: DownloadFile = (url, options) => {
 };
 
 /**
+ * 表单数据处理
+ * @param url
+ * @param options
+ */
+export const createFormFetch: Fetch = (url, options) => {
+    if (options && options.body && !isFormData(options.body) && !isEmptyObject(options.body)) {
+        const formData = new FormData();
+        for (const key in options.body) {
+            formData.append(key, isEmpty(options.body[key]) ? '' : options.body[key])
+        }
+        options.body = formData;
+    }
+    return createFetch(url, Object.assign({ method: MethodEnum.post, headers: {} }, options));
+}
+
+/**
  * 表单上传
  * @param url
  * @param options
  */
 export const uploadFormData: Fetch = (url, options) => {
-    return createFetch(url, Object.assign({ method: MethodEnum.post, headers: {} }, options));
+    return createFormFetch(url, Object.assign({ method: MethodEnum.post, headers: {} }, options));
 }
+
+/**
+ * 表单数据下发
+ */
+export const postFormData = uploadFormData;

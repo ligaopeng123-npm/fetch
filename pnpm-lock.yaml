@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@gaopeng123/utils.file': ^0.4.0
-  '@gaopeng123/utils.types': ^0.4.0
+  '@gaopeng123/utils.types': ^1.1.5
   '@size-limit/preset-small-lib': ^5.0.2
   commitizen: ^4.3.0
   conventional-changelog-cli: ^2.2.2
@@ -21,7 +21,7 @@ specifiers:
 
 dependencies:
   '@gaopeng123/utils.file': 0.4.16
-  '@gaopeng123/utils.types': 0.4.14
+  '@gaopeng123/utils.types': 1.1.5
   node-fetch: 2.6.7
 
 devDependencies:
@@ -1352,6 +1352,11 @@ packages:
 
   /@gaopeng123/utils.types/0.4.14:
     resolution: {integrity: sha512-t6UxA8h4ut0qSnE+ilLI5tB374/ejEpx3SacBAH4LO33QTDAc8/BdoAVxSgn8FfgMXTIfL906fgAH5ruDRUtxQ==}
+    engines: {node: '>=10'}
+    dev: false
+
+  /@gaopeng123/utils.types/1.1.5:
+    resolution: {integrity: sha512-uosKRYeAyAT1YA0Vjzx17Zlcwa6IvAv+wEqd0PIUopBYpbY2nJZwzgutte99ZwqWg96izX18pedvNNMl10d2zw==}
     engines: {node: '>=10'}
     dev: false
 

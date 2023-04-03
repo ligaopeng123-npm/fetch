@@ -125,6 +125,26 @@ downLoadFile("/api", {body: {}}).then((res)=>{
 });
 ```
 
+### createFormFetch
+
+`创建formData类型的请求`
+
+```tsx
+const postFormData = createFormFetch(url, {method: MethodEnum.post, body: {}});
+```
+
+### postFormData
+
+`下发表单数据`
+
+```tsx
+const params: FormData | {[propsName:string]: any
+// 参数如果不是FormData 则会转成FormData                   
+postFormData('api', {body: formData}).then(()=> {
+    
+});
+```
+
 ### uploadFormData
 
 `表单上传`
