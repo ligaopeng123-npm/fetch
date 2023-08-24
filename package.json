@@ -67,8 +67,8 @@
         "webpack-dev-server": "^4.0.0"
     },
     "dependencies": {
-        "@gaopeng123/utils.file": "^1.1.11",
-        "@gaopeng123/utils.types": "^1.1.10",
+        "@gaopeng123/utils.file": "latest",
+        "@gaopeng123/utils.types": "latest",
         "node-fetch": "^2.6.1"
     },
     "config": {
