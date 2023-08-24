@@ -1,8 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@gaopeng123/utils.file': ^1.1.11
-  '@gaopeng123/utils.types': ^1.1.10
+  '@gaopeng123/utils.file': latest
+  '@gaopeng123/utils.types': latest
   '@size-limit/preset-small-lib': ^5.0.2
   commitizen: ^4.3.0
   conventional-changelog-cli: ^2.2.2
