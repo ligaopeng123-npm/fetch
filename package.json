@@ -1,5 +1,5 @@
 {
-    "version": "0.3.2",
+    "version": "0.3.3",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -67,8 +67,8 @@
         "webpack-dev-server": "^4.0.0"
     },
     "dependencies": {
-        "@gaopeng123/utils.file": "^0.4.0",
-        "@gaopeng123/utils.types": "^1.1.5",
+        "@gaopeng123/utils.file": "^1.1.11",
+        "@gaopeng123/utils.types": "^1.1.10",
         "node-fetch": "^2.6.1"
     },
     "config": {

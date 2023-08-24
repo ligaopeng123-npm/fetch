@@ -1,8 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@gaopeng123/utils.file': ^0.4.0
-  '@gaopeng123/utils.types': ^1.1.5
+  '@gaopeng123/utils.file': ^1.1.11
+  '@gaopeng123/utils.types': ^1.1.10
   '@size-limit/preset-small-lib': ^5.0.2
   commitizen: ^4.3.0
   conventional-changelog-cli: ^2.2.2
@@ -20,8 +20,8 @@ specifiers:
   webpack-dev-server: ^4.0.0
 
 dependencies:
-  '@gaopeng123/utils.file': 0.4.16
-  '@gaopeng123/utils.types': 1.1.5
+  '@gaopeng123/utils.file': 1.1.11
+  '@gaopeng123/utils.types': 1.1.10
   node-fetch: 2.6.7
 
 devDependencies:
@@ -1318,45 +1318,40 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: true
 
-  /@gaopeng123/utils.file/0.4.16:
-    resolution: {integrity: sha512-6P12hUyreV+qVuGygbH1xgVk7bRolHTfPdXICsnafMkJDUIECLXMbxqYaqAtS6jyESEpdh/v829iGpbGaIGQ4Q==}
+  /@gaopeng123/utils.file/1.1.11:
+    resolution: {integrity: sha512-olE4D/xpHLEDxSmhP7fthzxavHCMhuXPIgDwBqZ3yJ8QtDWcXYIDtqubjSRFy8VKY5D/leVk8YVdzqd1p4j2FA==}
     engines: {node: '>=10'}
     dependencies:
-      '@gaopeng123/utils.object': 0.4.14
-      '@gaopeng123/utils.string': 0.4.16
-      '@gaopeng123/utils.types': 0.4.14
+      '@gaopeng123/utils.object': 1.1.11
+      '@gaopeng123/utils.string': 1.1.11
+      '@gaopeng123/utils.types': 1.1.10
     dev: false
 
-  /@gaopeng123/utils.function/0.4.14:
-    resolution: {integrity: sha512-0PQ69ibtP8jWB6hQSaYvfCpKU5Kv5Ehq4O2BVSOVOz3ogKPCc9t6DrOhY2OKNjnr3Uy/Y9CMXVc3MOK8I+cX2g==}
+  /@gaopeng123/utils.function/1.1.11:
+    resolution: {integrity: sha512-aooS1W1JGQLLFWzb0fQ3rWhfi8EktCGBnSSA3ZrloWr4ypYnCFwlB4HPjxVSnCDwVnSuv+mnoWDzD/8AEwXwyQ==}
     engines: {node: '>=10'}
     dependencies:
-      '@gaopeng123/utils.types': 0.4.14
+      '@gaopeng123/utils.types': 1.1.10
     dev: false
 
-  /@gaopeng123/utils.object/0.4.14:
-    resolution: {integrity: sha512-0dLhWwRx1By7yYVPYCKfFwU+2CIxJgU0+ywYbYpYsUHCvD/im3XoS7h4nK1BJLeyemtqKe3bjI1/pHR7kATWaw==}
+  /@gaopeng123/utils.object/1.1.11:
+    resolution: {integrity: sha512-4Pf0YazF5dUcFaHLElDlkgUySce/lO89eE6uM8lzWUwEs+lxwX0IOC0JNGjppPHbMWrfG00H0D/ESdXpyBZPFw==}
     engines: {node: '>=10'}
     dependencies:
-      '@gaopeng123/utils.function': 0.4.14
-      '@gaopeng123/utils.types': 0.4.14
+      '@gaopeng123/utils.function': 1.1.11
+      '@gaopeng123/utils.types': 1.1.10
     dev: false
 
-  /@gaopeng123/utils.string/0.4.16:
-    resolution: {integrity: sha512-plJ967qvkIX7L8PJhBoFXNtKbCdF2VBjDXoEAse1/W1baNqKqpoIxTW9JNYESU8OKesOQucNeZa6s7hhCZjkvg==}
+  /@gaopeng123/utils.string/1.1.11:
+    resolution: {integrity: sha512-8H8b1F8bouD5GK+M5pZ6SS3SZ9MIO+ytgNqqMck+LzqXmB5MWUNwdLQAUN1PxyWY7Rx7aoJ50RixHfw/rRzpgQ==}
     engines: {node: '>=10'}
     dependencies:
-      '@gaopeng123/utils.function': 0.4.14
-      '@gaopeng123/utils.types': 0.4.14
+      '@gaopeng123/utils.function': 1.1.11
+      '@gaopeng123/utils.types': 1.1.10
     dev: false
 
-  /@gaopeng123/utils.types/0.4.14:
-    resolution: {integrity: sha512-t6UxA8h4ut0qSnE+ilLI5tB374/ejEpx3SacBAH4LO33QTDAc8/BdoAVxSgn8FfgMXTIfL906fgAH5ruDRUtxQ==}
-    engines: {node: '>=10'}
-    dev: false
-
-  /@gaopeng123/utils.types/1.1.5:
-    resolution: {integrity: sha512-uosKRYeAyAT1YA0Vjzx17Zlcwa6IvAv+wEqd0PIUopBYpbY2nJZwzgutte99ZwqWg96izX18pedvNNMl10d2zw==}
+  /@gaopeng123/utils.types/1.1.10:
+    resolution: {integrity: sha512-2emiceVF0D0TDQp4LxJmzQ0uy7hx6IcuX7rP6KVE2jChyWDdRBwKCuc8qj5g7FGaeSelYZTqzjEB5B//ic6ugw==}
     engines: {node: '>=10'}
     dev: false
 
@@ -5464,7 +5459,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
