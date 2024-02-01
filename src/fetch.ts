@@ -12,7 +12,7 @@
 import { CreateFetch, DownloadFile, Fetch, MethodEnum, ResponseType } from "./typing";
 import { isArray, isEmptyObject, isObject, isFormData, isEmpty } from "@gaopeng123/utils.types";
 import { download, urlJoinParmas } from "@gaopeng123/utils.file";
-import errorCode, { isAbortError } from "./errorCode";
+import { errorCode, isAbortError } from "./errorCode";
 import { __fetch__ } from "./intercept";
 
 /**

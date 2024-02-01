@@ -9,7 +9,7 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-const errorCode = (code: number): string => {
+export const errorCode = (code: number): string => {
 	let message = ``;
 	switch (code) {
 		case 400:
@@ -57,4 +57,3 @@ const errorCode = (code: number): string => {
 export const isAbortError = (error: Error)=> {
 	return `${error}`?.includes('The user aborted a request.');
 }
-export default errorCode

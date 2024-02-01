@@ -18,7 +18,7 @@ let interceptors: Array<Intercept> = [];
  */
 export let __fetch__: any = null;
 
-function interceptor(_fetch_: any, ...args: any[]) {
+export function interceptor(_fetch_: any, ...args: any[]) {
     // @ts-ignore
     const reversedInterceptors: Array<Intercept> = interceptors.reduce((array, interceptor) => [interceptor].concat(array), []);
     let promise = Promise.resolve(args);
@@ -115,9 +115,7 @@ const getAttachProps = () => {
 
 const fetchIntercept = attach(getAttachProps());
 // 后续此处定义其他属性 例如可定义下发接口时长监听等
-const register = (intercept: Intercept): Unregister => {
+export const register = (intercept: Intercept): Unregister => {
     // @ts-ignore
     return fetchIntercept.register(intercept);
 };
-
-export default register
