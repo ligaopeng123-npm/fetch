@@ -1,4 +1,4 @@
-import {get, register} from '../src';
+import {get, register} from '../packages/fetch/src';
 
 const Intercept: any = {
 	request(url: string, config: any) {
