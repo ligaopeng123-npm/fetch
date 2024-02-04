@@ -1,6 +1,6 @@
 {
     "name": "@gaopeng123/fetch",
-    "version": "0.3.6",
+    "version": "0.3.7",
     "author": "ligaopeng123",
     "license": "MIT",
     "main": "dist/index.js",
