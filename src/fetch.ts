@@ -53,6 +53,24 @@ export const createFetch: CreateFetch = (url, options) => {
     }, opt.headers);
 
     return new Promise((resolve, reject) => {
+        // 支持重试
+        let { times, delay } = Object.assign({ times: 0, delay: 0 }, opt.retry);
+        const fetchLoop = () => {
+            const fetchHandleError = (error: string | Error) => {
+                // 如果是AbortError 则不再抛出
+                if (isAbortError(<Error>error)) {
+                    console.error(error);
+                } else {
+                    if (times) {
+                        times--;
+                        setTimeout(fetchLoop, delay);
+                    } else {
+                        console.error(`${url}请求出错，`, error);
+                        // 抛出报错信息 让模块接收到响应
+                        reject(`${url}请求出错，${error}`);
+                    }
+                }
+            }
             // "Content-Type", "text/plain"
             __fetch__(url, Object.assign({}, opt, { headers })).then((res: Response) => {
                 if (res?.clone) {
@@ -66,25 +84,17 @@ export const createFetch: CreateFetch = (url, options) => {
                             resolve(data[responseType] ? data[responseType]() : res);
                         }
                     } else {
-                        reject(errorCode(data.status));
+                        fetchHandleError(errorCode(data.status))
                     }
                 } else {
                     if (res !== undefined) {
                         resolve(res);
                     }
                 }
-            }).catch((error: Error) => {
-                // 如果是AbortError 则不再抛出
-                if (isAbortError(error)) {
-                    console.error(error);
-                } else {
-                    console.error(`${url}请求出错，`, error);
-                    // 抛出报错信息 让模块接收到响应
-                    reject(`${url}请求出错，${error}`);
-                }
-            });
+            }).catch(fetchHandleError);
         }
-    )
+        fetchLoop();
+    });
 };
 
 export const get: Fetch = (url, options) => {

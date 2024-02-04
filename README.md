@@ -57,7 +57,11 @@ body?: any; // post请求 参数放在body上
 params?: any; // get请求 参数拼接在url上
 responseType?: 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
 noModification?: boolean, // 是否要根据responseType做数据获取
-abortController?: AbortController, // 控制fetch abort
+abortController?: AbortController, // 控制fetch abort 
+retry?: {// 重试配置
+  times?: number; // 超时次数 默认 为0
+  delay?: number; // 延时执行时间 单位毫秒 默认为0
+},
 // 此处如果配置空对象 则不会再做任何覆盖操作 同样不会增加任何headers属性
 headers?: {
     token?: string;

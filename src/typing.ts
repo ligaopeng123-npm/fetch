@@ -18,6 +18,12 @@ export type Options = {
     responseType?: 'text' | 'json' | 'blob' | 'formData' | 'arrayBuffer';
     noModification?: boolean, // 是否要根据responseType做数据获取
     abortController?: AbortController, // 控制fetch abort
+    // 重试配置
+    retry?: {
+        times?: number; // 超时次数 默认 为0
+        delay?: number; // 延时执行时间 单位毫秒 默认为0
+    },
+    // timeout?: EpochTimeStamp; // 超时时间设置 需要服务端支持 超过服务端设置时间就没用了
     headers?: {
         token?: string;
         [propName: string]: any;

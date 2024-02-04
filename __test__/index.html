@@ -33,8 +33,15 @@
         const bth = document.getElementById('bth');
         const getData = () => {
             abortController = new AbortController();
-            get('/test.json', {responseType: 'text', abortController: abortController}).then((res) => {
-                console.log(res);
+            get('/test2.json', {
+                responseType: 'text', abortController: abortController, retry: {
+                    times: 3, // 超时重试
+                    delay: 5000, // 超时重试
+                },
+            }).then((res) => {
+                document.querySelector('#text').innerHTML = JSON.stringify(res)
+            }).catch((err) => {
+                document.querySelector('#text').innerHTML = JSON.stringify(err)
             });
         }
         bth.addEventListener('click', () => {
@@ -55,6 +62,6 @@
 </script>
 <button id="bth">下发</button>
 <button id="abort">abort</button>
-<p>显示区域</p>
+<p id="text">显示区域</p>
 </body>
 </html>
