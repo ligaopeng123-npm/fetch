@@ -1,5 +1,7 @@
 {
+    "name": "@gaopeng123/fetch",
     "version": "0.3.6",
+    "author": "ligaopeng123",
     "license": "MIT",
     "main": "dist/index.js",
     "module": "dist/fetch.esm.js",
@@ -38,8 +40,6 @@
         "type": "git",
         "url": "https://github.com/ligaopeng123-npm/fetch.git"
     },
-    "name": "@gaopeng123/fetch",
-    "author": "ligaopeng123",
     "size-limit": [
         {
             "path": "dist/fetch.cjs.production.min.js",
