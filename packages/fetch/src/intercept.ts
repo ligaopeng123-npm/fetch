@@ -108,7 +108,8 @@ const getAttachProps = () => {
     if (ENVIRONMENT_IS_WORKER) {
         __fetch__ = self.fetch;
     } else {
-        __fetch__ = window.fetch;
+        // 兼容nextjs
+        __fetch__ = fetch;
     }
     return __fetch__;
 }
