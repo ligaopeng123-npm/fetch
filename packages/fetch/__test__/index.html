@@ -15,7 +15,7 @@
         },
 
         requestError(error) {
-            console.log(error)
+            console.log('requestError', error)
         },
 
         response(response) {
@@ -24,7 +24,8 @@
         },
 
         responseError(error) {
-            console.log(error)
+            console.log('responseError', error)
+            return Promise.reject(error);
         },
     };
     register(Intercept);
@@ -47,6 +48,14 @@
         bth.addEventListener('click', () => {
             getData();
         });
+
+        document.querySelector('#error').addEventListener('click', () => {
+            get('/api/ligaopeng123-npm/utils/master/README.md').then(()=> {
+                console.log('111')
+            }).catch((error)=> {
+                console.log('error', error)
+            });
+        });
         /**
          * 测试是否可取消下发
          * @type {HTMLElement}
@@ -60,6 +69,7 @@
         });
     }
 </script>
+<button id="error">error</button>
 <button id="bth">下发</button>
 <button id="abort">abort</button>
 <p id="text">显示区域</p>

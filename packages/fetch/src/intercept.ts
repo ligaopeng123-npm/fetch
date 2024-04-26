@@ -9,8 +9,8 @@
  * @版权所有: pgli
  *
  **********************************************************************/
-import {Intercept, Unregister} from "./typing";
-import {isAbortError} from "./errorCode";
+import { Intercept, Unregister } from "./typing";
+import { isAbortError } from "./errorCode";
 
 let interceptors: Array<Intercept> = [];
 /**
@@ -24,7 +24,7 @@ export function interceptor(_fetch_: any, ...args: any[]) {
     let promise = Promise.resolve(args);
 
     // Register request interceptors
-    reversedInterceptors.forEach(({request, requestError}) => {
+    reversedInterceptors.forEach(({ request, requestError }) => {
         if (request || requestError) {
             // @ts-ignore
             promise = promise.then(args => request(...args), requestError);
@@ -50,15 +50,17 @@ export function interceptor(_fetch_: any, ...args: any[]) {
         } else {
             console.error('The response function requires a return value')
         }
-    });
+    })
 
     // Register response interceptors
-    reversedInterceptors.forEach(({response, responseError}) => {
+    reversedInterceptors.forEach(({ response, responseError }) => {
         if (response || responseError) {
             // @ts-ignore
-            promise = promise.then(response, (error)=> {
+            promise = promise.then(response, (error) => {
                 if (!isAbortError(error)) {
-                    responseError && responseError(error);
+                    if (responseError) {
+                        return responseError(error);
+                    }
                 }
             });
         }
