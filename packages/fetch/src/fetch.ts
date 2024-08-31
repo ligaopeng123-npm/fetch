@@ -67,7 +67,7 @@ export const createFetch: CreateFetch = (url, options) => {
                     } else {
                         console.error(`${url}请求出错，`, error);
                         // 抛出报错信息 让模块接收到响应
-                        reject(`${url}请求出错，${error}`);
+                        reject(error);
                     }
                 }
             }
