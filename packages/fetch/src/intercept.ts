@@ -11,6 +11,7 @@
  **********************************************************************/
 import { Intercept, Unregister } from "./typing";
 import { isAbortError } from "./errorCode";
+import { isString } from "@gaopeng123/utils.types";
 
 let interceptors: Array<Intercept> = [];
 /**
@@ -42,10 +43,17 @@ export function interceptor(_fetch_: any, ...args: any[]) {
                 // 绑定options参数
                 response.request.options = args[1];
                 return response;
-                // @ts-ignore
             }).catch((error: any) => {
-                error.request = request;
-                return Promise.reject(error);
+                let currentError = error;
+                if(isString(currentError)) {
+                    currentError = {
+                        error: error,
+                        request: request
+                    };
+                } else {
+                    currentError.request = request;
+                }
+                return Promise.reject(currentError);
             });
         } else {
             console.error('The response function requires a return value')
