@@ -79,5 +79,6 @@
     },
     "workspaces": [
         "packages/*"
-    ]
+    ],
+    "gitHead": "28b310d8679e4867be158097f952d0edf1ecf005"
 }
