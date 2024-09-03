@@ -73,12 +73,12 @@ export function interceptor(_fetch_: any, ...args: any[]) {
             });
         }
     });
-
     return promise;
 }
 
 
 const attach = (_fetch: any) => {
+    console.log('attach')
     // Make sure fetch is available in the given environment
     if (!_fetch) {
         try {
@@ -115,6 +115,7 @@ const ENVIRONMENT_IS_WORKER = typeof importScripts === 'function';
 
 // 兼容node环境
 const getAttachProps = () => {
+    console.log('getAttachProps')
     if (ENVIRONMENT_IS_WORKER) {
         __fetch__ = self.fetch;
     } else {
@@ -127,6 +128,7 @@ const getAttachProps = () => {
 const fetchIntercept = attach(getAttachProps());
 // 后续此处定义其他属性 例如可定义下发接口时长监听等
 export const register = (intercept: Intercept): Unregister => {
+    console.log('register')
     // @ts-ignore
     return fetchIntercept.register(intercept);
 };

@@ -71,27 +71,29 @@ export const createFetch: CreateFetch = (url, options) => {
                     }
                 }
             }
-            // "Content-Type", "text/plain"
-            __fetch__(url, Object.assign({}, opt, { headers })).then((res: Response) => {
-                if (res?.clone) {
-                    const data: any = res.clone();
-                    if (data.status >= 200 && data.status < 300) {
-                        if (opt.noModification) {
-                            resolve(res);
+            if (__fetch__) {
+                // "Content-Type", "text/plain"
+                __fetch__(url, Object.assign({}, opt, { headers })).then((res: Response) => {
+                    if (res?.clone) {
+                        const data: any = res.clone();
+                        if (data.status >= 200 && data.status < 300) {
+                            if (opt.noModification) {
+                                resolve(res);
+                            } else {
+                                const responseType: ResponseType = opt.responseType || 'json';
+                                // @ts-nocheck 动态检测responseType类型
+                                resolve(data[responseType] ? data[responseType]() : res);
+                            }
                         } else {
-                            const responseType: ResponseType = opt.responseType || 'json';
-                            // @ts-nocheck 动态检测responseType类型
-                            resolve(data[responseType] ? data[responseType]() : res);
+                            fetchHandleError(errorCode(data.status))
                         }
                     } else {
-                        fetchHandleError(errorCode(data.status))
+                        if (res !== undefined) {
+                            resolve(res);
+                        }
                     }
-                } else {
-                    if (res !== undefined) {
-                        resolve(res);
-                    }
-                }
-            }).catch(fetchHandleError);
+                }).catch(fetchHandleError);
+            }
         }
         fetchLoop();
     });
